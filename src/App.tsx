@@ -4,7 +4,7 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <header className="header">
-                <img src= "public/logo.svg" alt="logo"></img>
+                <img src= "public/Logo.svg" alt="logo"></img>
                 <h1>Welcome to Greenery</h1>
                 <h1>Food and Delivery</h1>
             </header>
