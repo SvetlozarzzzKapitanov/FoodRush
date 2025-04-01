@@ -1,14 +1,10 @@
 @import "tailwindcss";
 
 body {
+  background-color: #56473A;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-}
-.header img {
-  width: 100px;
-  display: block;
-  margin: 0 auto 0 auto;
 }
 
 .header {
@@ -16,11 +12,24 @@ body {
   background-color: #199B74;
   color: #DBD9D5;
   padding: 1em;
-  text-align: center;
 }
+.Branding {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+.Branding img {
+  width: 80px;
+  height: auto;
+}
+.Branding h1 {
+  margin: 0;
+  font-size: 1.5rem;
 
+}
 .nav {
-  background-color: #333;
+  background-color: #56473A;
   overflow: hidden;
 }
 
@@ -34,16 +43,15 @@ body {
 }
 
 .nav a:hover {
-  background-color: #098761;
+  background-color: #199B74;
   color: blanchedalmond;
 }
 
 .main {
-  padding: 20px;
 }
 
 .footer {
-  background-color: #DBD9D5;
+  background-color: #199B74;
   text-align: center;
   position: fixed;
   bottom: 0;

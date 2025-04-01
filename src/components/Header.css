@@ -1,0 +1,22 @@
+.header {
+    font-family: "Inria Serif", serif;
+    background-color: #199B74;
+    color: #DBD9D5;
+    padding: 1em;
+}
+.Branding {
+    margin-right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+.Branding img {
+    width: 80px;
+    height: auto;
+}
+.Branding h1 {
+    margin: 0;
+    font-size: 1.5rem;
+
+}
