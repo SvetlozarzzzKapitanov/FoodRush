@@ -1,11 +1,11 @@
 import React from 'react';
+import HeroSection from "./components/HeroSection.tsx";
 
 const App: React.FC = () => {
     return (
         <div className="app">
             <header className="header">
                 <img src= "public/Logo.svg" alt="logo"></img>
-                <h1>Welcome to Greenery</h1>
                 <h1>Food and Delivery</h1>
             </header>
             <nav className="nav">
@@ -14,12 +14,12 @@ const App: React.FC = () => {
                 <a href="#">Services</a>
                 <a href="#">Contact</a>
             </nav>
+            <>
+            <HeroSection>
+            </HeroSection>
+            </>
             <main className="main">
-                <div>
-                    <img src= "public/MainPage.jpg" alt="food"></img>
-                    <h2>Welcome</h2>
-                    <p>This is where your world of food expands!</p>
-                </div>
+
 
             </main>
             <footer className="footer">

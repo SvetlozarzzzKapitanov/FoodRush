@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+.hero-section {
+    background-image: url('public/MainPage.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 800px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container input {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000;
+    font-family: 'Inria Serif', serif;
+    padding: 10px 20px;
+    font-size: 38px;
+    border-radius: 200px;
+    border: none;
+    outline: none;
+    width: 800px;
+    max-width: 80%;
+    transition: all 0.3s ease;
+}
+.search-container input::placeholder {
+    opacity: 1;
+    color: #000;
+}
+.search-container input:focus,
+.search-container input:hover{
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.5);
+}
