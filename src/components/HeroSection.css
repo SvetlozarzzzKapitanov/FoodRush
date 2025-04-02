@@ -4,11 +4,12 @@
     background-image: url('public/MainPage.jpg');
     background-size: cover;
     background-position: center;
-    height: 800px;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    height: 100vh;
+    overflow: visible;
 }
 .search-bar {
     position: relative;
@@ -52,6 +53,7 @@
 }
 
 .search-icon img {
+    opacity: 1;
     width: 100%;
     height: auto;
 }

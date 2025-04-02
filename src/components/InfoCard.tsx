@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import './InfoCard.css';
 
 interface InfoCardProps {
@@ -7,7 +7,7 @@ interface InfoCardProps {
     height?: string;
 }
 
-const InfoCard: React.FC<InfoCardProps> = ({ children, width = '300px', height = '200px' }) => {
+const InfoCard: React.FC<InfoCardProps> = ({ children, width = '300px', height = 'auto' }) => {
     return (
         <div className="info-card" style={{ width, height }}>
             {children}

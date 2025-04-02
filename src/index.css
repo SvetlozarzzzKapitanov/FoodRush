@@ -7,53 +7,10 @@ body {
   padding: 0;
 }
 
-.header {
-  font-family: "Inria Serif", serif;
-  background-color: #199B74;
-  color: #DBD9D5;
-  padding: 1em;
-}
-.Branding {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-}
-.Branding img {
-  width: 80px;
-  height: auto;
-}
-.Branding h1 {
-  margin: 0;
-  font-size: 1.5rem;
-
-}
-.nav {
-  background-color: #56473A;
-  overflow: hidden;
-}
-
-.nav a {
-  float: left;
-  display: block;
-  color: #DBD9D5;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.nav a:hover {
-  background-color: #199B74;
-  color: blanchedalmond;
-}
-
-.main {
-}
-
 .footer {
   background-color: #199B74;
   text-align: center;
-  position: fixed;
+  position: relative ;
   bottom: 0;
   width: 100%;
   Height: 40px;

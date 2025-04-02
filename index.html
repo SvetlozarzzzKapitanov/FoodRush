@@ -10,5 +10,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+      <filter id="wavy">
+        <feTurbulence type="turbulence" baseFrequency="0.001 0.03" numOctaves="2" result="turbulence" />
+        <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="30" xChannelSelector="R" yChannelSelector="G" />
+        <animate xlink:href="#wavy feTurbulence" attributeName="baseFrequency" dur="10s" values="0.01 0.02; 0.02 0.01; 0.01 0.02" repeatCount="indefinite" />
+      </filter>
+    </svg>
   </body>
 </html>

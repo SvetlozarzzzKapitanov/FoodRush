@@ -1,9 +1,15 @@
 .info-section {
-    background-color: #199B74;
+    background: linear-gradient(180deg, #199B74, #05b3fd); /* Diagonal gradient */
     border-radius: 30px;
-    margin: -60px auto 0 auto; /* pull up over HeroSection */
     padding: 40px;
-    max-width: 90%;
+    max-width: 1800px;
+    margin: -60px auto 0 auto; /* pulls up a little over HeroSection */
     position: relative;
     z-index: 2;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
