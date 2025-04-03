@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .hero-section {
-    background-image: url('public/MainPage.jpg');
+    background-image: url('/public/MainPage.jpg');
     background-size: cover;
     background-position: center;
     display: flex;

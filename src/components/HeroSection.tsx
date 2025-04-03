@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
           />
 
             <button className="search-icon" onClick={handleSearch}>
-                <img src="/SearchLensIcon.svg" alt="Search" />
+                <img src="/public/SearchLensIcon.svg" alt="Search" />
             </button>
         </div>
       </div>
