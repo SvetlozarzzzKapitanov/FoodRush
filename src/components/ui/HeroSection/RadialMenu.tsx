@@ -16,12 +16,11 @@ const RadialMenu: React.FC<RadialMenuProps> = ({ children }) => {
         <div className="radial-container">
             <ul className="radial-list">
                 {children.map((child, index) => {
-                    const angle = (360 / count) * index - 90; // -90° so the first item goes up
-                    const radius = open ? 100 : 0;
+                    const radius = open ? 200 : 0;
+                    const angle = (2 * Math.PI * index) / count; // пълна обиколка
 
-                    const x = radius * Math.cos(angle * (Math.PI / 180));
-                    const y = radius * Math.sin(angle * (Math.PI / 180));
-
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
                     return (
                         <li
                             key={index}
@@ -43,6 +42,7 @@ const RadialMenu: React.FC<RadialMenuProps> = ({ children }) => {
             </button>
         </div>
     );
+
 };
 
 export default RadialMenu;
