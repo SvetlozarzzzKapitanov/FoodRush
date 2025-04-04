@@ -1,6 +1,6 @@
 import React from 'react';
 import './HeroSection.css';
-import SearchBar from './SearchBar';
+import SearchBar from './SearchBar.tsx';
 
 
 const HeroSection: React.FC = () => {

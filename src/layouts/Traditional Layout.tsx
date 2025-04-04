@@ -1,6 +1,6 @@
-import Header from "../components/Header.tsx";
-import InfoSection from "../components/InfoSection.tsx";
-import HeroSection from "../components/HeroSection.tsx";
+import Header from "../components/ui/Headers/Header.tsx";
+import InfoSection from "../components/ui/InfoSection/InfoSection.tsx";
+import HeroSection from "../components/ui/HeroSection/HeroSection.tsx";
 
 const TraditionalLayout = () => {
     return (

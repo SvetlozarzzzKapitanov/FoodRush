@@ -13,8 +13,8 @@ const Header: React.FC = () => {
                 </ul>
                 <a href="http://localhost:5173">
                     <div className="logo-container ">
-                        <div className="logo-svg">
-                            {<svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className="logo-svg">{
+                            <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="180" cy="180" r="180" fill="#199B74"/>
                                 <circle cx="179.5" cy="179.5" r="173.5" fill="#D9D9D9"/>
                                 <path d="M6 180L353 180" stroke="#199B74" stroke-width="6" stroke-linecap="round"/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoCard from './InfoCard';
+import InfoCard from './InfoCard.tsx';
 import './InfoSection.css';
 
 const InfoSection: React.FC = () => {

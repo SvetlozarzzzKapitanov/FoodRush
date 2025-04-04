@@ -15,7 +15,7 @@ const SearchBar: React.FC = () => {
                 placeholder="Hungry? Let’s fix that."
             />
             <button className="search-icon" onClick={handleSearch}>
-                <img src="/public/SearchLensIcon.svg" alt="Search" />
+                <img src="/src/assets/SearchLensIcon.svg" alt="Search" />
             </button>
         </div>
     );

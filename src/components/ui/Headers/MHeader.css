@@ -1,0 +1,82 @@
+/* === Header container === */
+.modern-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: transparent;
+    z-index: 1000;
+    color: white;
+}
+
+/* === Centered brand block (logo + name) === */
+.brand {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space between logo and name */
+    z-index: 2;
+}
+
+/* === Logo with gradient border === */
+.logo-wrapper {
+    background: linear-gradient(135deg, #199B74, #05b3fd);
+    padding: 3px; /* thickness of gradient border */
+    border-radius: 50%;
+    display: inline-flex;
+}
+
+/* === Circle background behind SVG === */
+.logo-inner {
+    background-color: transparent;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* === Scale SVG properly === */
+.logo-inner svg {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+/* === Company name === */
+.company-name {
+    font-size: 2rem;
+    font-family: 'Inria Serif', serif;
+    color: white;
+    margin: 0;
+}
+
+/* === Login button === */
+.header-right {
+    z-index: 2;
+}
+
+.login-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
