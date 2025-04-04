@@ -1,0 +1,83 @@
+.radial-container {
+    position: absolute;
+    bottom: 600px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    z-index: 10;
+}
+
+/* Central toggle button */
+.radial-toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #199b74;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+.radial-toggle:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.radial-list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.radial-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translate(-50%, -50%);
+    transition:
+            transform 0.5s cubic-bezier(0.25, 1.5, 0.5, 1),
+            opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* When menu is open, we override transform via inline style in TS */
+.radial-item.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Bubble = icon */
+.bubble-icon {
+    border: #05b3fd solid 1px;
+    width: 70px;
+    height: 70px;
+    background-color: #dbd9d5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Label = below bubble */
+.bubble-label {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: #199b74;
+    text-align: center;
+}

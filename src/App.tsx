@@ -1,25 +1,23 @@
-import React from 'react';
-import HeroSection from "./components/HeroSection.tsx";
-import Header from "./components/Header.tsx";
-import InfoSection from "./components/InfoSection.tsx";
+import TraditionalLayout from "./layouts/Traditional Layout.tsx";
+import ModernLayout from "./layouts/ModernLayout.tsx";
+import {useState} from "react";
+import './App.css';
 
-const App: React.FC = () => {
+function App() {
+    const [useModernLayout, setUseModernLayout] = useState(true);
+
     return (
-        <div className="app">
-            <Header>
-            </Header>
-            <main className="main">
-                <>
-                    <HeroSection/>
-                    <InfoSection/>
-                </>
-            </main>
-            <footer className="footer">
-                <p>&copy; 2025 My Website</p>
-            </footer>
+        <div>
+            <button
+                className="layout-toggle-btn"
+                onClick={() => setUseModernLayout(!useModernLayout)}
+            >
+                {useModernLayout ? 'Switch to Traditional' : 'Switch to Modern'}
+            </button>
+
+            {useModernLayout ? <ModernLayout /> : <TraditionalLayout />}
         </div>
     );
-};
+}
 
 export default App;
-
