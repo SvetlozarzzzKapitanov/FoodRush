@@ -1,5 +1,6 @@
 import React from 'react';
 import './MHeader.css';
+import { Link } from 'react-router-dom';
 
 const ModernHeader: React.FC = () => {
     return (
@@ -54,7 +55,12 @@ const ModernHeader: React.FC = () => {
 
 
             <div className="header-right">
-                <button className="login-button">Login</button>
+                <Link to="/login">
+                    <button className="login-button">Login</button>
+                </Link>
+                <Link to="/register">
+                    <button className="register-button">Register</button>
+                </Link>
             </div>
         </header>
     );

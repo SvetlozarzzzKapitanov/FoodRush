@@ -14,7 +14,7 @@ const Login: React.FC = () => {
     return (
       <div className="bg-container">
         <div className="login-form">
-          <h2>Вход</h2>
+          <h2>Login</h2>
           {successMessage && <p className="success-message">{successMessage}</p>}
           <form onSubmit={handleLogin}>
             <label htmlFor="username">Username</label>
