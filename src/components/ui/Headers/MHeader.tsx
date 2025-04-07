@@ -7,7 +7,7 @@ const ModernHeader: React.FC = () => {
         <header className="modern-header">
             <div className="header-left" /> {/* Empty, for symmetry */}
 
-            <div className="brand">
+            <Link to="/" className="brand" style={{ textDecoration: 'none' }}>
                 <div className="logo-wrapper">
                     <div className="logo-inner">
                         <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@ const ModernHeader: React.FC = () => {
                 </div>
 
                 <span className="company-name">FoodRush</span>
-            </div>
+            </Link>
 
 
             <div className="header-right">

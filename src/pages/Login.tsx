@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
+import MHeader from "../components/ui/Headers/MHeader.tsx";
 
 const Login: React.FC = () => {
     const location = useLocation();
@@ -13,6 +14,7 @@ const Login: React.FC = () => {
     };
     return (
       <div className="bg-container">
+          <MHeader/>
         <div className="login-form">
           <h2>Login</h2>
           {successMessage && <p className="success-message">{successMessage}</p>}

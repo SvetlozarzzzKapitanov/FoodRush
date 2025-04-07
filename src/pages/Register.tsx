@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import MHeader from "../components/ui/Headers/MHeader.tsx";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Register = () => {
   
     return (
       <div className="bg-container">
+          <MHeader/>
         <div className="login-form">
           <h2>Registration</h2>
           <form onSubmit={handleRegister}>
