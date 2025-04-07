@@ -1,4 +1,3 @@
-import React, {Fragment} from 'react';
 import './MHeroSection.css';
 import RadialMenu from "./RadialMenu.tsx";
 import bgImage from '/src/assets/MainPage.jpg';
@@ -24,44 +23,23 @@ const MHeroSection: React.FC = () => {
                 <RadialMenu>
                     <div className="radial-bubble">
                         <div className="bubble-icon">🏠</div>
-                        <div className="bubble-label">Home</div>
+                        <div className="bubble-label">Профил</div>
                     </div>
                     <div className="radial-bubble">
                         <div className="bubble-icon">📋</div>
-                        <div className="bubble-label">Menu</div>
+                        <div className="bubble-label">Поръчки</div>
                     </div>
                     <div className="radial-bubble">
                         <div className="bubble-icon">🍽️</div>
-                        <div className="bubble-label">Restaurants</div>
+                        <div className="bubble-label">Ресторанти</div>
                     </div>
                     <div className="radial-bubble">
                         <div className="bubble-icon">ℹ️</div>
-                        <div className="bubble-label">About</div>
+                        <div className="bubble-label">За Нас</div>
                     </div>
                     <div className="radial-bubble">
                         <div className="bubble-icon">📞</div>
-                        <div className="bubble-label">Contact</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">🏠</div>
-                        <div className="bubble-label">Home</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">📋</div>
-                        <Fragment></Fragment>
-                        <div className="bubble-label">Menu</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">🍽️</div>
-                        <div className="bubble-label">Restaurants</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">ℹ️</div>
-                        <div className="bubble-label">About</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">📞</div>
-                        <div className="bubble-label">Contact</div>
+                        <div className="bubble-label">Контакти</div>
                     </div>
                 </RadialMenu>
             </div>
