@@ -3,6 +3,7 @@ import ModernLayout from "./layouts/ModernLayout.tsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
+import Contact from "./pages/Contact.tsx";
 import {useState} from "react";
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/contact" element={<Contact />} />
                     /*<Route path="*" element={useModernLayout ? <ModernLayout /> : <TraditionalLayout />} />*/
                 </Routes>
             </div>

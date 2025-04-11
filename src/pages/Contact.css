@@ -1,0 +1,64 @@
+.contact-container {
+    background-image: url('/MainPage.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.contact-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 340px;
+    text-align: center;
+}
+  
+.contact-card h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+} 
+.contact-card p {
+    font-style: italic;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    text-align: center;
+}
+.contact-card strong{
+    font-weight: 900;
+    
+}
+.social-icons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+  
+.social-icons a {
+    color: #007bff;
+    font-size: 1.8rem;
+    transition: color 0.3s;
+}
+  
+.social-icons a:hover {
+    color: #0056b3;
+}
+contact-card a {
+    color: #007bff;
+    text-decoration: none;
+    
+}
+ .contact-card a:hover {
+    text-decoration: underline;
+}
+  .contact-card svg {
+    vertical-align: middle;
+    flex-shrink: 0;
+}

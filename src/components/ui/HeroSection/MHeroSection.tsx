@@ -1,6 +1,7 @@
 import './MHeroSection.css';
 import RadialMenu from "./RadialMenu.tsx";
 import bgImage from '/src/assets/MainPage.jpg';
+import { Link } from 'react-router-dom';
 
 const MHeroSection: React.FC = () => {
     return (
@@ -38,8 +39,10 @@ const MHeroSection: React.FC = () => {
                         <div className="bubble-label">За Нас</div>
                     </div>
                     <div className="radial-bubble">
+                        <Link to="/contact">
                         <div className="bubble-icon">📞</div>
                         <div className="bubble-label">Контакти</div>
+                        </Link>
                     </div>
                 </RadialMenu>
             </div>
