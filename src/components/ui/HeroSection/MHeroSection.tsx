@@ -35,8 +35,10 @@ const MHeroSection: React.FC = () => {
                         <div className="bubble-label">Ресторанти</div>
                     </div>
                     <div className="radial-bubble">
+                        <Link to="/about">
                         <div className="bubble-icon">ℹ️</div>
                         <div className="bubble-label">За Нас</div>
+                        </Link>
                     </div>
                     <div className="radial-bubble">
                         <Link to="/contact">

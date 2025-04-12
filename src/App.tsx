@@ -6,6 +6,7 @@ import Register from "./pages/Register.tsx";
 import Contact from "./pages/Contact.tsx";
 import {useState} from "react";
 import './App.css';
+import AboutUs from "./pages/AboutUs.tsx";
 
 function App() {
     const [useModernLayout, setUseModernLayout] = useState(true);
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/about" element={<AboutUs />} />
                     /*<Route path="*" element={useModernLayout ? <ModernLayout /> : <TraditionalLayout />} />*/
                 </Routes>
             </div>
