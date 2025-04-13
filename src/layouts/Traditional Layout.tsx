@@ -1,5 +1,4 @@
 import Header from "../components/ui/Headers/Header.tsx";
-import InfoSection from "../components/ui/InfoSection/InfoSection.tsx";
 import HeroSection from "../components/ui/HeroSection/HeroSection.tsx";
 
 const TraditionalLayout = () => {
@@ -10,7 +9,6 @@ const TraditionalLayout = () => {
             <main className="main">
                 <>
                     <HeroSection/>
-                    <InfoSection/>
                 </>
             </main>
             {/* Add more sections here later: Menu, Testimonials, Footer, etc */}

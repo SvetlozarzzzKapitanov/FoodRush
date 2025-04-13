@@ -7,10 +7,11 @@ import Contact from "./pages/Contact.tsx";
 import {useState} from "react";
 import './App.css';
 import AboutUs from "./pages/AboutUs.tsx";
+import MenuPage from "./pages/MenuPage.tsx";
 
 function App() {
+    // const [useModernLayout] = useState(true);
     const [useModernLayout, setUseModernLayout] = useState(true);
-
     return (
         <Router>
             <div>
@@ -26,7 +27,8 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<AboutUs />} />
-                    /*<Route path="*" element={useModernLayout ? <ModernLayout /> : <TraditionalLayout />} />*/
+                    <Route path="/menu" element={<MenuPage />} />
+                    <Route path="*" element={useModernLayout ? <ModernLayout /> : <TraditionalLayout />} />
                 </Routes>
             </div>
         </Router>

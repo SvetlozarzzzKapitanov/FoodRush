@@ -1,7 +1,6 @@
 import './MHeroSection.css';
 import RadialMenu from "./RadialMenu.tsx";
 import bgImage from '/src/assets/MainPage.jpg';
-import { Link } from 'react-router-dom';
 
 const MHeroSection: React.FC = () => {
     return (
@@ -21,32 +20,16 @@ const MHeroSection: React.FC = () => {
             </div>
 
             <div className="radial-wrapper">
-                <RadialMenu>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">🏠</div>
-                        <div className="bubble-label">Профил</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">📋</div>
-                        <div className="bubble-label">Поръчки</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <div className="bubble-icon">🍽️</div>
-                        <div className="bubble-label">Ресторанти</div>
-                    </div>
-                    <div className="radial-bubble">
-                        <Link to="/about">
-                        <div className="bubble-icon">ℹ️</div>
-                        <div className="bubble-label">За Нас</div>
-                        </Link>
-                    </div>
-                    <div className="radial-bubble">
-                        <Link to="/contact">
-                        <div className="bubble-icon">📞</div>
-                        <div className="bubble-label">Контакти</div>
-                        </Link>
-                    </div>
-                </RadialMenu>
+                <RadialMenu
+                    items={[
+                        { label: 'Начало', icon: '🏠', to: '/' },
+                        { label: 'Меню', icon: '📋', to: '/menu' },
+                        { label: 'За нас', icon: 'ℹ️', to: '/about' },
+                        { label: 'Контакти', icon: '📞', to: '/contact' },
+                        { label: 'Вход', icon: '🔐', to: '/login' },
+                    ]}
+                />
+
             </div>
         </section>
     );

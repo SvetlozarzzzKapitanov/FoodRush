@@ -1,26 +1,33 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RadialMenu.css';
 
-interface RadialMenuProps {
-    children: ReactNode[];
+interface RadialItem {
+    label: string;
+    icon?: React.ReactNode;
+    to: string;
 }
 
-const RadialMenu: React.FC<RadialMenuProps> = ({ children }) => {
+interface RadialMenuProps {
+    items: RadialItem[];
+}
+
+const RadialMenu: React.FC<RadialMenuProps> = ({ items }) => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => setOpen(!open);
-
-    const count = children.length;
+    const count = items.length;
 
     return (
         <div className="radial-container">
             <ul className="radial-list">
-                {children.map((child, index) => {
+                {items.map((item, index) => {
                     const radius = open ? 200 : 0;
-                    const angle = (2 * Math.PI * index) / count; // пълна обиколка
-
-                    const x = Math.cos(angle) * radius;
+                    const angle = (2 * Math.PI * index) / count; // semi-circle (top to bottom)
+                    const x = -Math.cos(angle) * radius; // to the left
                     const y = Math.sin(angle) * radius;
+
                     return (
                         <li
                             key={index}
@@ -30,8 +37,10 @@ const RadialMenu: React.FC<RadialMenuProps> = ({ children }) => {
                                 opacity: open ? 1 : 0,
                                 transitionDelay: `${index * 0.05}s`,
                             }}
+                            onClick={() => navigate(item.to)}
                         >
-                            {child}
+                            {item.icon && <div className="bubble-icon">{item.icon}</div>}
+                            <div className="bubble-label">{item.label}</div>
                         </li>
                     );
                 })}
@@ -46,3 +55,8 @@ const RadialMenu: React.FC<RadialMenuProps> = ({ children }) => {
 };
 
 export default RadialMenu;
+// const radius = open ? 200 : 0;
+// const angle = (2 * Math.PI * index) / count; // пълна обиколка
+//
+// const x = Math.cos(angle) * radius;
+// const y = Math.sin(angle) * radius;
