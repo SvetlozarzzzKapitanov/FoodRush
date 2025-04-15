@@ -1,20 +1,13 @@
-import React from 'react';
-import './MenuItemCard.css';
+import React from 'react'
+import './MenuItemCard.css'
+import { Product } from '../../../types'
 
-interface MenuItem {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl?: string;
-}
-
-const MenuItemCard: React.FC<{ item: MenuItem }> = ({ item }) => {
+const MenuItemCard: React.FC<{ item: Product }> = ({ item }) => {
     return (
         <div className="menu-card">
             <div className="menu-card-inner">
                 <img
-                    src={item.imageUrl || '/placeholder.jpg'}
+                    src={item.imageUrl || '/Burger.jpg'}
                     alt={item.name}
                     className="menu-card-image"
                 />
@@ -24,7 +17,7 @@ const MenuItemCard: React.FC<{ item: MenuItem }> = ({ item }) => {
                 <button className="menu-card-button">Add to cart</button>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default MenuItemCard;
+export default MenuItemCard

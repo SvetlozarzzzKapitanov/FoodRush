@@ -1,16 +1,9 @@
-import React from 'react';
-import './MenuSection.css';
-import MenuItemCard from './MenuItemCard';
+import React from 'react'
+import './MenuSection.css'
+import MenuItemCard from './MenuItemCard'
+import { Product } from '../../../types'
 
-interface MenuItem {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl?: string;
-}
-
-const MenuSection: React.FC<{ items: MenuItem[] }> = ({ items }) => {
+const MenuSection: React.FC<{ items: Product[] }> = ({ items }) => {
     return (
         <div className="menu-section">
             <h2>Menu</h2>
@@ -22,8 +15,7 @@ const MenuSection: React.FC<{ items: MenuItem[] }> = ({ items }) => {
                 </div>
             </div>
         </div>
+    )
+}
 
-    );
-};
-
-export default MenuSection;
+export default MenuSection

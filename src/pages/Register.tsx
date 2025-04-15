@@ -1,33 +1,65 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
-import MHeader from "../components/ui/Headers/MHeader.tsx";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { registerUser } from '../api/authApi'
+import MHeader from '../components/ui/Headers/MHeader'
+import PageWrapper from '../components/ui/PageWrapper'
+import './Login.css'
 
-const Register = () => {
-    const navigate = useNavigate();
-  
-    const handleRegister = (e: React.FormEvent) => {
-      e.preventDefault();
-      navigate("/login", { state: { registered: true } });
-    };
-  
+const Register: React.FC = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+
+    const handleRegister = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setLoading(true)
+        try {
+            await registerUser({ username, password })
+            navigate('/login', { state: { registered: true } })
+        } catch (err) {
+            setError('Registration failed. Please try again.')
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
-      <div className="bg-container">
-          <MHeader/>
-        <div className="login-form">
-          <h2>Registration</h2>
-          <form onSubmit={handleRegister}>
-            <label htmlFor="new-username">Username</label>
-            <input type="text" id="new-username" name="new-username" placeholder="Username" />
-  
-            <label htmlFor="new-password">Password</label>
-            <input type="password" id="new-password" name="new-password" placeholder="Password" />
-  
-            <button type="submit">Registration</button>
-          </form>
-        </div>
-      </div>
-    );
-  };
+        <div className="bg-container">
+            <MHeader />
+            <PageWrapper loading={loading}>
+                <div className="login-form">
+                    <h2>Register</h2>
+                    {error && <p className="error-message">{error}</p>}
+                    <form onSubmit={handleRegister}>
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            placeholder="Enter username"
+                        />
 
-export default Register;
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder="Enter password"
+                        />
+
+                        <button type="submit">Register</button>
+                    </form>
+                    <p className="register-link">
+                        Already have an account? <a href="/login">Login</a>
+                    </p>
+                </div>
+            </PageWrapper>
+        </div>
+    )
+}
+
+export default Register

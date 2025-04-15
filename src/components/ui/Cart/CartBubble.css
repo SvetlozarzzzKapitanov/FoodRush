@@ -1,0 +1,29 @@
+.cart-bubble {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #1abc9c;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.2s ease;
+}
+
+.cart-bubble:hover {
+    transform: scale(1.05);
+}
+
+.cart-bubble::after {
+    content: '🛒';
+    font-size: 1.2rem;
+    margin-left: 0.3rem;
+}
