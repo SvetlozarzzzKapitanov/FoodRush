@@ -41,13 +41,13 @@ const Login: React.FC = () => {
                     {successMessage && <p className="success-message">{successMessage}</p>}
                     {error && <p className="error-message">{error}</p>}
                     <form onSubmit={handleLogin}>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">E-mail</label>
                         <input
                             type="text"
                             id="username"
                             value={username}
                             onChange={e => setUsername(e.target.value)}
-                            placeholder="Enter username"
+                            placeholder="Enter e-mail"
                         />
 
                         <label htmlFor="password">Password</label>

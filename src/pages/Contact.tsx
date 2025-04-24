@@ -26,18 +26,24 @@ const Contact: React.FC = () => {
                     <p>
                         <FaMapMarkerAlt style={{ marginRight: '5px', color: '#007bff' }} />
                         <a
-                            href="https://www.google.com/maps/place/SAP+Labs+Bulgaria/@42.639507,23.342411,17z"
+                            href="https://www.google.com/maps/place/SAP+Labs+Bulgaria/@42.6603877,23.3184622,17z/data=!4m6!3m5!1s0x40a8fe964c0f552f:0xf16513b0a4f40273!8m2!3d42.6598587!4d23.3210517!16s%2Fg%2F1tlzynys?entry=ttu&g_ep=EgoyMDI1MDQyMS4wIKXMDSoASAFQAw%3D%3D"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            бул. Цариградско шосе 115Г, София
+                            ул. „Сребърна“ 16, 1407 София
                         </a>
                     </p>
 
                     <div className="social-icons">
-                        <a href="#"><FaFacebook /></a>
-                        <a href="#"><FaInstagram /></a>
-                        <a href="#"><FaXTwitter /></a>
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                        <FaFacebook />
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                        <FaInstagram />
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+                        <FaXTwitter />
+                    </a>
                     </div>
                 </div>
             </PageWrapper>
