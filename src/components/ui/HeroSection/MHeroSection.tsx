@@ -23,7 +23,7 @@ const MHeroSection: React.FC = () => {
                 <RadialMenu
                     items={[
                         { label: 'Начало', icon: '🏠', to: '/' },
-                        { label: 'Меню', icon: '📋', to: '/menu' },
+                        { label: 'Меню', icon: '📋', to: '/restaurants' },
                         { label: 'За нас', icon: 'ℹ️', to: '/about' },
                         { label: 'Контакти', icon: '📞', to: '/contact' },
                         { label: 'Вход', icon: '🔐', to: '/login' },

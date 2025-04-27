@@ -1,5 +1,5 @@
 export interface Product {
-    id: number
+    restaurantId: number
     name: string
     description: string
     price: number
@@ -23,3 +23,10 @@ export interface User {
     address?: string
     role: 'customer' | 'admin'
 }
+export type Restaurant = {
+    id: number;
+    name: string;
+    description: string;
+    location: string;
+    imageUrl?: string;
+};

@@ -4,52 +4,49 @@ import MHeader from '../components/ui/Headers/MHeader'
 import MenuSection from '../components/ui/Menu/MenuSection'
 import { Product } from '../types'
 import PageWrapper from '../components/ui/PageWrapper'
-import { useCart } from '../components/ui/Cart/CartContext'
 import './MenuPage.css'
+import { useLocation } from 'react-router-dom';
 
-interface MenuPageProps {
-    mockProducts?: Product[]
-}
+const MenuPage: React.FC = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const restaurantId = queryParams.get('restaurantId');
 
-const MenuPage: React.FC<MenuPageProps> = ({ mockProducts }) => {
-    const [products, setProducts] = useState<Product[] | null>(mockProducts || null)
-    const [loading, setLoading] = useState(!mockProducts)
-    const { addToCart } = useCart()
+    const [products, setProducts] = useState<Product[] | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (mockProducts) return
         getAllProducts()
-            .then(data => setProducts(data))
-            .catch(error => {
-                console.error('Failed to load products:', error)
-                setProducts(null)
+            .then(data => {
+                if (restaurantId) {
+                    const filtered = data.filter(product => product.restaurantId === parseInt(restaurantId));
+                    setProducts(filtered);
+                } else {
+                    setProducts(data);
+                }
             })
-            .finally(() => setLoading(false))
-    }, [mockProducts])
+            .catch(error => {
+                console.error('Failed to load products:', error);
+                setProducts(null);
+            })
+            .finally(() => setLoading(false));
+    }, [restaurantId]);
 
-    useEffect(() => {
-        // Local mock test item
-        addToCart({
-            id: 999,
-            name: 'Mock Pizza',
-            price: 12.99,
-            description: 'Test item for cart',
-            imageUrl: '/Margherita.jpg'
-        })
-    }, [])
-
+    console.log('Products:', products);
     return (
         <div className="menu-page">
             <MHeader />
-            {products && Array.isArray(products) && products.length > 0 ? (
-                <PageWrapper loading={loading}>
+            <PageWrapper loading={loading}>
+                {products && products.length > 0 ? (
                     <MenuSection items={products} />
-                </PageWrapper>
-            ) : (
-                <div className="empty-fallback">
-                    <p>No products available or failed to load.</p>
-                </div>
-            )}
+                ) : (
+                    !loading && (
+                        <div className="empty-fallback">
+                            <p>No products available or failed to load.</p>
+                        </div>
+                    )
+                )}
+            </PageWrapper>
         </div>
     )
 }

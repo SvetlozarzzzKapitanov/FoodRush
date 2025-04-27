@@ -10,7 +10,7 @@ const MenuSection: React.FC<{ items: Product[] }> = ({ items }) => {
             <div className="menu-wrapper">
                 <div className="menu-grid">
                     {items.map(item => (
-                        <MenuItemCard key={item.id} item={item} />
+                        <MenuItemCard key={item.restaurantId} item={item} />
                     ))}
                 </div>
             </div>
