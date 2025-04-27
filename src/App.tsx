@@ -9,7 +9,6 @@ import OrderTestPage from "./pages/OrderTestPage.tsx"
 import OrderListPage from "./pages/OrderListPage.tsx"
 import { CartProvider } from "./components/ui/Cart/CartContext"
 import CartBubble from "./components/ui/Cart/CartBubble"
-import { Product } from "./types"
 import "./App.css"
 import CartPage from "./pages/CartPage.tsx";
 import RestaurantsPage from "./pages/RestaurantsPage.tsx";

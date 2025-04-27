@@ -1,36 +1,36 @@
-import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { loginUser } from '../api/authApi'
-import MHeader from '../components/ui/Headers/MHeader'
-import PageWrapper from '../components/ui/PageWrapper'
-import './Login.css'
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { loginUser } from '../api/authApi';
+import MHeader from '../components/ui/Headers/MHeader';
+import PageWrapper from '../components/ui/PageWrapper';
+import './Login.css';
 
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState<string | null>(null)
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
-    const location = useLocation()
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const successMessage = location.state?.registered
         ? 'Successful registration! Please log in to your account.'
-        : null
+        : null;
 
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setLoading(true)
+        e.preventDefault();
+        setLoading(true);
         try {
-            const res = await loginUser({ username, password })
-            localStorage.setItem('token', res.token)
-            localStorage.setItem('user', JSON.stringify(res.user))
-            navigate('/')
+            const res = await loginUser({ username, password });
+            localStorage.setItem('token', res.token);
+            localStorage.setItem('user', JSON.stringify(res.user));
+            navigate('/menu');
         } catch (err) {
-            setError('Login failed. Please check your credentials.')
+            setError('Login failed. Please check your credentials.');
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <div className="bg-container">
@@ -55,7 +55,7 @@ const Login: React.FC = () => {
                             type="password"
                             id="password"
                             value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="Enter password"
                         />
 
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
                 </div>
             </PageWrapper>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;
