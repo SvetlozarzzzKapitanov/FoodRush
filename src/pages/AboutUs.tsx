@@ -1,11 +1,11 @@
 import React from "react";
 import "./AboutUs.css";
 import MHeader from "../components/ui/Headers/MHeader.tsx";
-import PageWrapper from "../components/ui/PageWrapper";
+import PageWrapper from "../components/ui/Other/PageWrapper.tsx";
 
 const AboutUs: React.FC = () => {
     return (
-        <div className="aboutus-bg">
+        <div className="bg-container">
             <MHeader />
             <PageWrapper>
                 <div className="aboutus-card">

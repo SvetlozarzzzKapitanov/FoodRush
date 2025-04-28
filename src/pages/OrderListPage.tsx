@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Order } from '../types'
 import API from '../api/api'
-import PageWrapper from '../components/ui/PageWrapper'
+import PageWrapper from '../components/ui/Other/PageWrapper.tsx'
 
 const OrderListPage: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([])

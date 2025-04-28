@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    border-radius: 20px;
     background-color: rgba(25, 154, 115, 0.43);
 }
 
@@ -30,7 +29,7 @@
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 20rem;
     justify-items: center;
     align-items: stretch;
     width: 100%;

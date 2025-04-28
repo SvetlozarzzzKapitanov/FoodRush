@@ -3,7 +3,7 @@ import { getAllRestaurants } from '../api/restaurantApi';
 import MHeader from '../components/ui/Headers/MHeader';
 import RestaurantSection from '../components/ui/Restaurant/RestaurantSection';
 import { Restaurant } from '../types';
-import PageWrapper from '../components/ui/PageWrapper';
+import PageWrapper from '../components/ui/Other/PageWrapper.tsx';
 
 const RestaurantsPage: React.FC = () => {
     const [restaurants, setRestaurants] = useState<Restaurant[] | null>(null);

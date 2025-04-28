@@ -3,7 +3,7 @@ import { getAllProducts } from '../api/productApi';
 import MHeader from '../components/ui/Headers/MHeader';
 import MenuSection from '../components/ui/Menu/MenuSection';
 import { Product } from '../types';
-import PageWrapper from '../components/ui/PageWrapper';
+import PageWrapper from '../components/ui/Other/PageWrapper.tsx';
 import { useLocation } from 'react-router-dom';
 import './MenuPage.css';
 

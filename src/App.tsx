@@ -12,6 +12,7 @@ import CartBubble from "./components/ui/Cart/CartBubble"
 import "./App.css"
 import CartPage from "./pages/CartPage.tsx";
 import RestaurantsPage from "./pages/RestaurantsPage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                             <Route path="/order-test" element={<OrderTestPage />} />
                             <Route path="/orders" element={<OrderListPage />} />
                             <Route path="*" element={<ModernLayout />} />
+                            <Route path="/profile" element={<ProfilePage />} />
                         </Routes>
                     </div>
                 </Router>

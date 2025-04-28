@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCart } from '../components/ui/Cart/CartContext'
-import PageWrapper from '../components/ui/PageWrapper'
+import PageWrapper from '../components/ui/Other/PageWrapper.tsx'
 import MHeader from '../components/ui/Headers/MHeader'
 import API from '../api/api'
 import './MenuPage.css'

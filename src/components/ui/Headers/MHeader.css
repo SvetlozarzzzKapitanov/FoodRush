@@ -2,18 +2,24 @@
 .modern-header {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 70px;
+    height: 80px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0 40px;
-    background: transparent;
-    z-index: 1000;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
     color: white;
+    transition: background 0.3s ease;
 }
-
+.modern-header.scrolled {
+    background: rgba(0, 0, 0, 0.6);
+}
 /* === Centered brand block (logo + name) === */
 .brand {
     position: absolute;

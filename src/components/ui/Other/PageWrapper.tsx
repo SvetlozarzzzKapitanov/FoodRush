@@ -1,5 +1,6 @@
 import React from 'react'
-import Loader from './Loader'
+import Loader from './Loader.tsx'
+import "./PageWrapper.css"
 
 interface PageWrapperProps {
     loading?: boolean

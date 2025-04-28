@@ -1,0 +1,7 @@
+.page-wrapper {
+    padding-top: 30px; /* space for the header */
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
