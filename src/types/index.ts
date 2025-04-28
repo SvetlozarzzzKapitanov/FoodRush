@@ -1,9 +1,11 @@
 export interface Product {
-    restaurantId: number
+    id: number
     name: string
     description: string
     price: number
     imageUrl: string
+    category: string
+    restaurantId: number
 }
 
 export interface Order {
