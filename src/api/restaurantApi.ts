@@ -1,32 +1,26 @@
+import API from './api';
 import { Restaurant } from '../types';
 
 export const getAllRestaurants = async (): Promise<Restaurant[]> => {
-    // Fake API delay simulation
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve([
-                {
-                    id: 1,
-                    name: 'Green Garden Bistro',
-                    description: 'Fresh organic meals and cozy atmosphere.',
-                    location: 'Downtown',
-                    imageUrl: '/Bistro.jpg'
-                },
-                {
-                    id: 2,
-                    name: 'Urban Grill House',
-                    description: 'Best steaks and BBQ in town!',
-                    location: 'City Center',
-                    imageUrl: '/Grill.jpg'
-                },
-                {
-                    id: 3,
-                    name: 'Sunset Sushi Bar',
-                    description: 'Authentic Japanese sushi experience.',
-                    location: 'Seaside',
-                    imageUrl: '/SushiBar.jpg'
-                }
-            ]);
-        }, 1000); // simulate 1s server delay
-    });
+    const res = await API.get<Restaurant[]>('/restaurants');
+    return res.data;
+};
+
+export const getRestaurantById = async (id: number): Promise<Restaurant> => {
+    const res = await API.get<Restaurant>(`/restaurants/${id}`);
+    return res.data;
+};
+
+export const createRestaurant = async (restaurant: Partial<Restaurant>): Promise<Restaurant> => {
+    const res = await API.post<Restaurant>('/restaurants', restaurant);
+    return res.data;
+};
+
+export const updateRestaurant = async (id: number, restaurant: Partial<Restaurant>): Promise<Restaurant> => {
+    const res = await API.put<Restaurant>(`/restaurants/${id}`, restaurant);
+    return res.data;
+};
+
+export const deleteRestaurant = async (id: number): Promise<void> => {
+    await API.delete(`/restaurants/${id}`);
 };

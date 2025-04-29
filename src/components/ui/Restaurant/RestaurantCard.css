@@ -20,12 +20,12 @@
     align-items: center;
     gap: 12px;
 }
-
+.menu-card-inner.no-image {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 .menu-card-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 12px;
+    display: none;
 }
 
 .menu-card-title {

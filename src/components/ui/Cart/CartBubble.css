@@ -1,21 +1,28 @@
-.cart-bubble {
+.cart-bubble-wrapper {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-bubble {
     background-color: #1abc9c;
     color: white;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    z-index: 1000;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.3s;
 }
 
 .cart-bubble:hover {
@@ -26,4 +33,50 @@
     content: '🛒';
     font-size: 1.2rem;
     margin-left: 0.3rem;
+}
+
+.cart-bubble.disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.cart-bubble-price {
+    font-size: 0.7rem;
+    font-weight: normal;
+}
+
+.plus-one-wrapper {
+    position: absolute;
+    bottom: 70px;
+    pointer-events: none;
+}
+
+.plus-one-floating {
+    position: absolute;
+    bottom: 70px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: bold;
+    pointer-events: none;
+    animation: floatToCart 0.5s forwards ease-out;
+}
+
+@keyframes floatToCart {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        /*noinspection CssUnresolvedCustomProperty*/
+        transform: translate(calc(var(--sway) / 4), -10px) scale(1.1);
+    }
+    50% {
+        /*noinspection CssUnresolvedCustomProperty*/
+        transform: translate(calc(var(--sway) / 2), -20px) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        /*noinspection CssUnresolvedCustomProperty*/
+        transform: translate(var(--sway), -40px) scale(0);
+    }
 }

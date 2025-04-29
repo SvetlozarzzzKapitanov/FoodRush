@@ -29,12 +29,6 @@ const Login: React.FC = () => {
                 console.error('Login response missing token!');
             }
 
-            if (res.user) {
-                localStorage.setItem('user', JSON.stringify(res.user));
-            } else {
-                console.error('Login response missing user!');
-            }
-
             navigate('/menu');
         } catch (err: any) {
             console.error('Login error:', err);

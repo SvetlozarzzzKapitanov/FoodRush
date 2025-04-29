@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MHeader from '../components/ui/Headers/MHeader';
 import { registerCustomer, registerEmployee, registerDelivery } from '../api/authApi';
 import './Login.css'; // can be reused
+import { RegisterCredentials } from '../types'
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -17,10 +18,12 @@ const Register: React.FC = () => {
         setLoading(true);
         setError(null);
         try {
-            const registerFunction =
-                role === 'customer' ? registerCustomer :
-                    role === 'employee' ? registerEmployee :
-                        registerDelivery;
+            const registerFunction: (data: RegisterCredentials) => Promise<void> =
+                role === 'customer'
+                    ? registerCustomer
+                    : role === 'employee'
+                        ? registerEmployee
+                        : registerDelivery;
 
             await registerFunction({ email, password });
             navigate('/login', { state: { registered: true } });

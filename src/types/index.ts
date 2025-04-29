@@ -32,3 +32,8 @@ export type Restaurant = {
     location: string;
     imageUrl?: string;
 };
+
+export interface RegisterCredentials {
+    email: string;
+    password: string;
+}

@@ -1,24 +1,51 @@
 import React from 'react'
 import { useCart } from '../components/ui/Cart/CartContext'
-import PageWrapper from '../components/ui/Other/PageWrapper.tsx'
+import PageWrapper from '../components/ui/Other/PageWrapper'
 import MHeader from '../components/ui/Headers/MHeader'
-import API from '../api/api'
 import './MenuPage.css'
 import './CartPage.css'
 import { Product } from '../types'
+import { useNavigate } from 'react-router-dom'
+import { parseJwt } from '../assets/parseJwt'
+import { createOrder } from '../api/orderApi'
 
 const CartPage: React.FC = () => {
     const { cart, removeFromCart, clearCart } = useCart()
+    const navigate = useNavigate()
+
+    const groupedCart = cart.reduce((acc: { [key: number]: { product: Product, quantity: number } }, item: Product) => {
+        if (acc[item.id]) {
+            acc[item.id].quantity += 1;
+        } else {
+            acc[item.id] = { product: item, quantity: 1 };
+        }
+        return acc;
+    }, {});
 
     const handlePlaceOrder = async () => {
         try {
-            await API.post('/orders/create', {
-                products: cart.map((p: Product) => p.id),
-            })
-            alert('Order placed successfully!')
+            const token = localStorage.getItem('token')
+            if (!token) {
+                alert('You must be logged in to place an order.')
+                return
+            }
+
+            const decoded = parseJwt(token)
+            const customerId = decoded?.user_id
+
+            if (!customerId) {
+                alert('Could not extract customer ID from token.')
+                return
+            }
+
+            const productIds = cart.map((p: Product) => p.id)
+
+            await createOrder(customerId, productIds)
+
             clearCart()
+            navigate('/order')
         } catch (err) {
-            console.error(err)
+            console.error('Failed to place order:', err)
             alert('Failed to place order.')
         }
     }
@@ -35,21 +62,25 @@ const CartPage: React.FC = () => {
                 ) : (
                     <div className="cart-list-wrapper">
                         <ul className="cart-list">
-                            {cart.map((item: Product) => (
-                                <li key={item.id} className="cart-list-item">
+                            {Object.values(groupedCart).map(({ product, quantity }) => (
+                                <li key={product.id} className="cart-list-item">
                                     <div className="cart-item-details">
-                                        <h4>{item.name}</h4>
-                                        <p>{item.description}</p>
-                                        <span>${item.price.toFixed(2)}</span>
+                                        <h4>{product.name}</h4>
+                                        <p>{product.description}</p>
+                                        <span>
+                                            {quantity} × ${product.price.toFixed(2)} = ${(product.price * quantity).toFixed(2)}
+                                        </span>
                                     </div>
-                                    <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+                                    <button className="remove-btn" onClick={() => removeFromCart(product.id)}>
                                         Remove
                                     </button>
                                 </li>
                             ))}
                         </ul>
                         <h3 className="cart-total">
-                            Total: ${cart.reduce((sum: number, item: Product) => sum + item.price, 0).toFixed(2)}
+                            Total: ${Object.values(groupedCart)
+                            .reduce((sum, { product, quantity }) => sum + product.price * quantity, 0)
+                            .toFixed(2)}
                         </h3>
                         <div className="place-order-container">
                             <button className="place-order-btn" onClick={handlePlaceOrder}>

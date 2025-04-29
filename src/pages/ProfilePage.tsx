@@ -55,7 +55,7 @@ const ProfilePage: React.FC = () => {
                         {activeTab === 'settings' && (
                             <div className="settings-section">
                                 <h3>Account Settings</h3>
-                                <p>Here you can later add options like change password, update info, etc.</p>
+                                <p>Stuff</p>
                                 <button className="logout-button" onClick={handleLogout}>
                                     Logout
                                 </button>

@@ -12,18 +12,13 @@ const RestaurantCard: React.FC<{ item: Restaurant }> = ({ item }) => {
             onClick={() => navigate(`/menu?restaurantId=${item.id}`)}
             style={{ cursor: 'pointer' }}
         >
-            <div className="menu-card-inner">
-                <img
-                    src={item.imageUrl || '/Restaurant.jpg'}
-                    alt={item.name}
-                    className="menu-card-image"
-                />
+            <div className="menu-card-inner no-image">
                 <h3 className="menu-card-title">{item.name}</h3>
                 <p className="menu-card-description">{item.description}</p>
                 <p className="menu-card-location">{item.location}</p>
             </div>
         </div>
     );
-}
+};
 
 export default RestaurantCard;

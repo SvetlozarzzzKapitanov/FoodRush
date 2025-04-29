@@ -5,14 +5,13 @@ import Register from "./pages/Register.tsx"
 import Contact from "./pages/Contact.tsx"
 import AboutUs from "./pages/AboutUs.tsx"
 import MenuPage from "./pages/MenuPage.tsx"
-import OrderTestPage from "./pages/OrderTestPage.tsx"
-import OrderListPage from "./pages/OrderListPage.tsx"
 import { CartProvider } from "./components/ui/Cart/CartContext"
 import CartBubble from "./components/ui/Cart/CartBubble"
 import "./App.css"
 import CartPage from "./pages/CartPage.tsx";
 import RestaurantsPage from "./pages/RestaurantsPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import OrderPage from "./pages/OrderPage.tsx";
 
 function App() {
     return (
@@ -28,10 +27,10 @@ function App() {
                             <Route path="/menu" element={<MenuPage />} />
                             <Route path="/cart" element={<CartPage />} />
                             <Route path="/restaurants" element={<RestaurantsPage />} />
-                            <Route path="/order-test" element={<OrderTestPage />} />
-                            <Route path="/orders" element={<OrderListPage />} />
                             <Route path="*" element={<ModernLayout />} />
                             <Route path="/profile" element={<ProfilePage />} />
+                            <Route path="/order" element={<OrderPage />} />
+                            {/*<Route path="/settings" element={<SettingsPage />} />*/}
                         </Routes>
                     </div>
                 </Router>
