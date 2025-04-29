@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProductManagmentTab.css';
+import './RestaurantManagmentTab.css'
 
 interface Restaurant {
     id: number;
@@ -13,6 +14,11 @@ const RestaurantManagementTab: React.FC = () => {
     const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
     const [editId, setEditId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
+    const [newRestaurant, setNewRestaurant] = useState({
+        name: '',
+        address: '',
+        phoneNumber: ''
+    });
 
     useEffect(() => {
         const fetch = async () => {
@@ -28,6 +34,16 @@ const RestaurantManagementTab: React.FC = () => {
 
         fetch();
     }, []);
+    const handleAddRestaurant = async () => {
+        try {
+            const res = await axios.post('/api/restaurants', newRestaurant);
+            setRestaurants(prev => [...prev, res.data]);
+            setNewRestaurant({ name: '', address: '', phoneNumber: '' });
+        } catch (err) {
+            console.error('Failed to create restaurant:', err);
+            alert('Could not create restaurant.');
+        }
+    };
 
     const handleUpdate = async (restaurant: Restaurant) => {
         try {
@@ -47,6 +63,28 @@ const RestaurantManagementTab: React.FC = () => {
     return (
         <section className="product-management">
             <h3>Restaurant Management</h3>
+            <div className="add-restaurant-form">
+                <input
+                    type="text"
+                    placeholder="Name"
+                    value={newRestaurant.name}
+                    onChange={e => setNewRestaurant(prev => ({ ...prev, name: e.target.value }))}
+                />
+                <input
+                    type="text"
+                    placeholder="Address"
+                    value={newRestaurant.address}
+                    onChange={e => setNewRestaurant(prev => ({ ...prev, address: e.target.value }))}
+                />
+                <input
+                    type="text"
+                    placeholder="Phone Number"
+                    value={newRestaurant.phoneNumber}
+                    onChange={e => setNewRestaurant(prev => ({ ...prev, phoneNumber: e.target.value }))}
+                />
+                <button className="save" onClick={handleAddRestaurant}>Add</button>
+            </div>
+
 
             {restaurants.map(r => (
                 <div key={r.id} className="product-row">

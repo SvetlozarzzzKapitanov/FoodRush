@@ -82,3 +82,9 @@
 .logout-button:hover {
     background-color: #b71c1c;
 }
+.logout-button.delivery {
+    background-color: #3498db;
+}
+.logout-button.delivery:hover {
+    background-color: #2980b9;
+}

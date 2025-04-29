@@ -7,7 +7,7 @@ import { getAllRestaurants } from '../api/restaurantApi';
 import ProductManagementTab from "../components/ui/EmployeeDashboard/ProductManagmentTab.tsx";
 import PendingOrdersTab from "../components/ui/EmployeeDashboard/PendingOrdersTab.tsx";
 import RestaurantManagementTab from "../components/ui/EmployeeDashboard/RestaurantManagmentTab.tsx";
-// import RevenueReportTab from '../components/Employee/RevenueReportTab';
+import RevenueTab from "../components/ui/EmployeeDashboard/RevenueTab.tsx";
 
 const tabs = ['Orders', 'Products', 'Restaurant', 'Revenue'] as const;
 type Tab = typeof tabs[number];
@@ -88,9 +88,7 @@ const EmployeeDashboard: React.FC = () => {
                             restaurantId ? <PendingOrdersTab restaurantId={restaurantId} /> : <p>Select a restaurant to view orders.</p>
                         )}
                         {activeTab === 'Restaurant' && <RestaurantManagementTab />}
-                        {activeTab === 'Revenue' && (
-                            restaurantId ? <p>Revenue tab content here...</p> : <p>Select a restaurant to view revenue.</p>
-                        )}
+                        {activeTab === 'Revenue' && <RevenueTab restaurantId={restaurantId} />}
                     </div>
                 </div>
             </PageWrapper>

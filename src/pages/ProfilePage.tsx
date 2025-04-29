@@ -48,6 +48,15 @@ const ProfilePage: React.FC = () => {
                             Admin Dashboard
                         </button>
                     )}
+                    {user?.role === 'DELIVERY' && (
+                        <button
+                            className="logout-button"
+                            style={{ backgroundColor: '#3498db', marginTop: '1rem' }}
+                            onClick={() => navigate('/dashboard/delivery')}
+                        >
+                            Delivery Dashboard
+                        </button>
+                    )}
 
                     <div className="profile-tabs">
                         <button
