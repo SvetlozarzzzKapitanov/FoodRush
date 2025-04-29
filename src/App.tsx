@@ -15,6 +15,7 @@ import OrderPage from "./pages/OrderPage.tsx";
 import TrackOrderPage from "./pages/TrackOrderPage.tsx";
 import EmployeeDashboard from "./pages/EmployeeDashboard.tsx";
 import DeliveryDashboard from "./pages/DeliveryDashboard.tsx";
+import ProtectedRoute from "./components/ui/ProtectedRoute.tsx";
 
 function App() {
     return (
@@ -34,8 +35,17 @@ function App() {
                             <Route path="/profile" element={<ProfilePage />} />
                             <Route path="/order" element={<OrderPage />} />
                             <Route path="/order/track/:orderId" element={<TrackOrderPage />} />
-                            <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
-                            <Route path="/delivery/dashboard" element={<DeliveryDashboard />} />
+                            <Route path="/employee/dashboard" element={
+                                <ProtectedRoute requiredRole="EMPLOYEE">
+                                    <EmployeeDashboard />
+                                </ProtectedRoute>
+                            } />
+
+                            <Route path="/dashboard/delivery" element={
+                                <ProtectedRoute requiredRole="DELIVERY">
+                                    <DeliveryDashboard />
+                                </ProtectedRoute>
+                            } />
 
                         </Routes>
                     </div>
