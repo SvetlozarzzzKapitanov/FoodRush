@@ -1,5 +1,5 @@
 // src/api/orderApi.ts
-
+import axios from "axios";
 import API from './api';
 import { Order } from '../types';
 
@@ -33,10 +33,9 @@ export const createOrder = async (
  * Get full order with status and products for tracking view
  * GET /api/orders/track/{orderId}
  */
-export const fetchOrderDetails = async (
-    orderId: number,
-    customerId: number
-): Promise<Order> => {
-    const res = await API.get<Order>(`/orders/track/${orderId}?customerId=${customerId}`);
-    return res.data;
-};
+export async function fetchOrderDetails(orderId: number, customerId: number): Promise<Order | null> {
+    const res = await axios.get<Order[]>(`/api/orders/customer/${customerId}`);
+    const orders = res.data;
+    return orders.find(order => order.id === orderId) || null;
+}
+

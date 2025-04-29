@@ -8,21 +8,6 @@ export interface Product {
     restaurantId: number
 }
 
-export interface OrderProductInfo {
-    productName: string;
-    pricePerUnit: number;
-    quantity: number;
-    totalProductPrice: number;
-}
-
-export interface Order {
-    products: OrderProductInfo[];
-    totalPrice: number;
-    orderStatus: string; // previously `orderStatus`
-    createdDate: string;
-    id: number;
-}
-
 export interface User {
     email: string;
     [key: string]: any;
@@ -45,4 +30,20 @@ export interface TrackOrder {
 export interface RegisterCredentials {
     email: string;
     password: string;
+}
+export interface OrderItem {
+    name: string;
+    quantity: number;
+}
+
+export interface Order {
+    id: number;
+    customerName: string;
+    items: OrderItem[];
+    totalPrice: number;
+    status: string;
+    createdDate: string;
+}
+export interface Props {
+    restaurantId: number;
 }

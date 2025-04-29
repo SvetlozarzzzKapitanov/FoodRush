@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProductManagmentTab.css'; // Reuse the same style
-
-interface OrderItem {
-    name: string;
-    quantity: number;
-}
-
-interface Order {
-    id: number;
-    customerName: string;
-    items: OrderItem[];
-    totalPrice: number;
-    status: string;
-}
-
-interface Props {
-    restaurantId: number;
-}
+import {
+    Order,
+    Props
+} from '../../../types';
 
 const PendingOrdersTab: React.FC<Props> = ({ restaurantId }) => {
     const [orders, setOrders] = useState<Order[]>([]);

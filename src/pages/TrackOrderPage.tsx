@@ -3,9 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import PageWrapper from '../components/ui/Other/PageWrapper';
 import MHeader from '../components/ui/Headers/MHeader';
 import { parseJwt } from '../assets/parseJwt';
-import { fetchOrderDetails } from '../api/orderApi';
-import './TrackOrderPage.css';
+import { fetchOrderDetails } from '../api/orderApi'; // updated
 import { Order } from '../types';
+import './TrackOrderPage.css';
 
 const statusSteps = ['Pending', 'Preparing', 'Out for Delivery', 'Delivered'];
 
@@ -28,8 +28,8 @@ const TrackOrderPage: React.FC = () => {
 
                 const data = await fetchOrderDetails(Number(orderId), customerId);
                 if (!data) throw new Error("Order not found or invalid response");
-                console.log("🧾 Order received:", order);
-                console.log("Date value received:", order.createdDate);
+
+                console.log("🧾 Order received:", data);
                 setOrder(data);
             } catch (err) {
                 console.error('Failed to fetch order details:', err);
@@ -44,7 +44,7 @@ const TrackOrderPage: React.FC = () => {
     }, [orderId, navigate]);
 
     const getStepIndex = (status?: string) => {
-        if (!status) return 0;
+        if (!status || typeof status !== 'string') return 0;
         return Math.max(
             0,
             statusSteps.findIndex(s => s.toLowerCase() === status.toLowerCase())
@@ -58,13 +58,12 @@ const TrackOrderPage: React.FC = () => {
                 {order ? (
                     <div className="track-order-wrapper">
                         <h3>Order #{order.id}</h3>
-
                         <div className="status-progress-bar">
                             {statusSteps.map((step, idx) => (
                                 <div
                                     key={step}
                                     className={`status-step ${
-                                        idx <= getStepIndex(order.orderStatus) ? 'active' : ''
+                                        idx <= getStepIndex(order.status) ? 'active' : ''
                                     }`}
                                 >
                                     <div className="circle">{idx + 1}</div>
@@ -78,16 +77,17 @@ const TrackOrderPage: React.FC = () => {
                             <ul className="order-items">
                                 {order.products.map((p, idx) => (
                                     <li key={idx} className="order-item">
-                                        <span className="item-name">{p.productName}</span>
+                                        <span className="item-name">{p.name}</span>
                                         <span className="item-qty">
-                      {p.quantity} × ${p.pricePerUnit.toFixed(2)}
-                    </span>
+                                            {p.quantity} × ${p.price?.toFixed(2) ?? '0.00'}
+                                        </span>
                                         <span className="item-total">
-                      = ${p.totalProductPrice.toFixed(2)}
-                    </span>
+                                            = ${(p.quantity * (p.price ?? 0)).toFixed(2)}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
+
 
                             <h4 className="order-total">
                                 Total: ${order.totalPrice.toFixed(2)}
@@ -103,7 +103,6 @@ const TrackOrderPage: React.FC = () => {
                                     })
                                     : 'N/A'}
                             </p>
-
                         </div>
 
                         <div className="back-button-container">

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import PageWrapper from '../components/ui/Other/PageWrapper';
 import MHeader from '../components/ui/Headers/MHeader';
 import { parseJwt } from '../assets/parseJwt';
-import API from '../api/api';
+import { Order } from '../types';
 import './OrderPage.css';
-import {Order} from "../types";
 
 const OrderPage: React.FC = () => {
     const navigate = useNavigate();
@@ -17,26 +17,32 @@ const OrderPage: React.FC = () => {
             try {
                 const token = localStorage.getItem('token');
                 if (!token) return;
-
                 const decoded = parseJwt(token);
                 const customerId = decoded?.user_id;
-
                 if (!customerId) return;
 
-                const res = await API.get<Order[]>(`/orders/customer/${customerId}`);
+                const res = await axios.get(`/api/orders/customer/${customerId}`);
                 setOrders(res.data);
-                console.log('Order dates:', res.data.map((o) => o.createdDate));
-                console.log('Orders:', res.data);
+
             } catch (err) {
-                console.error('Failed to fetch orders:', err);
+                if (axios.isAxiosError(err)) {
+                    console.error('API error:', err.response?.data || err.message);
+                } else {
+                    console.error('Unexpected error:', err);
+                }
             }
         };
 
         fetchOrders();
     }, []);
 
-    const currentOrders = orders.filter(o => !['Delivered', 'Cancelled'].includes(o.orderStatus));
-    const historyOrders = orders.filter(o => ['Delivered', 'Cancelled'].includes(o.orderStatus));
+    const currentOrders = orders.filter(o =>
+        ['PENDING', 'PREPARING', 'OUT FOR DELIVERY'].includes(o.status.toUpperCase())
+    );
+
+    const historyOrders = orders.filter(o =>
+        ['DELIVERED', 'CANCELLED'].includes(o.status.toUpperCase())
+    );
 
     return (
         <div className="menu-page">
@@ -62,10 +68,10 @@ const OrderPage: React.FC = () => {
                         <div key={order.id} className="order-card">
                             <h4>Order #{order.id}</h4>
                             <p>
-                                Status:{' '}
-                                <span className={`status-tag ${order.orderStatus.toLowerCase().replace(/ /g, '-')}`}>
-                                    {order.orderStatus.toUpperCase()}
-                                </span>
+                                Status:
+                                <span className={`status-tag ${order.status.toLowerCase().replace(/\s+/g, '-')}`}>
+          {order.status}
+        </span>
                             </p>
                             <p>Total: ${order.totalPrice.toFixed(2)}</p>
                             <p>
@@ -73,7 +79,7 @@ const OrderPage: React.FC = () => {
                                 {new Date(order.createdDate).toLocaleString('bg-BG', {
                                     dateStyle: 'medium',
                                     timeStyle: 'short',
-                                    hour12: false
+                                    hour12: false,
                                 })}
                             </p>
                             <button className="back-button" onClick={() => navigate(`/order/track/${order.id}`)}>
@@ -88,6 +94,7 @@ const OrderPage: React.FC = () => {
                         </p>
                     )}
                 </div>
+
 
                 <div className="back-button-container">
                     <button className="back-button" onClick={() => navigate('/menu')}>
