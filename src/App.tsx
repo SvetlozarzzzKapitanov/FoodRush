@@ -12,6 +12,8 @@ import CartPage from "./pages/CartPage.tsx";
 import RestaurantsPage from "./pages/RestaurantsPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import OrderPage from "./pages/OrderPage.tsx";
+import TrackOrderPage from "./pages/TrackOrderPage.tsx";
+import EmployeeDashboard from "./pages/EmployeeDashboard.tsx";
 
 function App() {
     return (
@@ -30,6 +32,8 @@ function App() {
                             <Route path="*" element={<ModernLayout />} />
                             <Route path="/profile" element={<ProfilePage />} />
                             <Route path="/order" element={<OrderPage />} />
+                            <Route path="/order/track/:orderId" element={<TrackOrderPage />} />
+                            <Route path="/employee/dashboard" element={<EmployeeDashboard />} />
                             {/*<Route path="/settings" element={<SettingsPage />} />*/}
                         </Routes>
                     </div>

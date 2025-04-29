@@ -5,13 +5,7 @@ import MHeader from '../components/ui/Headers/MHeader';
 import { parseJwt } from '../assets/parseJwt';
 import API from '../api/api';
 import './OrderPage.css';
-
-interface Order {
-    id: number;
-    status: string;
-    totalPrice: number;
-    createdDate: string;
-}
+import {Order} from "../types";
 
 const OrderPage: React.FC = () => {
     const navigate = useNavigate();
@@ -31,9 +25,8 @@ const OrderPage: React.FC = () => {
 
                 const res = await API.get<Order[]>(`/orders/customer/${customerId}`);
                 setOrders(res.data);
-                console.log('Order dates:', res.data.map((o: any) => o.createdAt));
+                console.log('Order dates:', res.data.map((o) => o.createdDate));
                 console.log('Orders:', res.data);
-
             } catch (err) {
                 console.error('Failed to fetch orders:', err);
             }
@@ -42,8 +35,8 @@ const OrderPage: React.FC = () => {
         fetchOrders();
     }, []);
 
-    const currentOrders = orders.filter(o => !['Delivered', 'Cancelled'].includes(o.status));
-    const historyOrders = orders.filter(o => ['Delivered', 'Cancelled'].includes(o.status));
+    const currentOrders = orders.filter(o => !['Delivered', 'Cancelled'].includes(o.orderStatus));
+    const historyOrders = orders.filter(o => ['Delivered', 'Cancelled'].includes(o.orderStatus));
 
     return (
         <div className="menu-page">
@@ -70,23 +63,22 @@ const OrderPage: React.FC = () => {
                             <h4>Order #{order.id}</h4>
                             <p>
                                 Status:{' '}
-                                <span className={`status-tag ${order.status.toLowerCase().replace(/ /g, '-')}`}>
-                                    {order.status.toUpperCase()}
+                                <span className={`status-tag ${order.orderStatus.toLowerCase().replace(/ /g, '-')}`}>
+                                    {order.orderStatus.toUpperCase()}
                                 </span>
                             </p>
                             <p>Total: ${order.totalPrice.toFixed(2)}</p>
                             <p>
                                 Date:{' '}
-                                {order.createdDate
-                                    ? new Date(order.createdDate).toLocaleString('bg-BG', {
-                                        dateStyle: 'medium',
-                                        timeStyle: 'short',
-                                        hour12: false
-                                    })
-                                    : 'Няма информация'}
+                                {new Date(order.createdDate).toLocaleString('bg-BG', {
+                                    dateStyle: 'medium',
+                                    timeStyle: 'short',
+                                    hour12: false
+                                })}
                             </p>
-
-
+                            <button className="back-button" onClick={() => navigate(`/order/track/${order.id}`)}>
+                                Track Order
+                            </button>
                         </div>
                     ))}
 

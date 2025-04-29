@@ -16,6 +16,7 @@ const RestaurantsPage: React.FC = () => {
     useEffect(() => {
         getAllRestaurants()
             .then(data => {
+                console.log("Fetched restaurants:", data); // 👈 add this
                 if (query) {
                     const filtered = data.filter(r =>
                         r.name.toLowerCase().includes(query)

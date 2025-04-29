@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PageWrapper from '../components/ui/Other/PageWrapper.tsx';
 import MHeader from '../components/ui/Headers/MHeader';
 import './ProfilePage.css';
-
-interface User {
-    email: string;
-    [key: string]: any;
-}
+import { User } from '../types';
 
 const ProfilePage: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -42,6 +38,17 @@ const ProfilePage: React.FC = () => {
                 <div className="profile-container">
                     <h2>Welcome, {user?.email}</h2>
 
+                    {/* Admin Dashboard button for EMPLOYEE users only */}
+                    {user?.role === 'EMPLOYEE' && (
+                        <button
+                            className="logout-button"
+                            style={{ backgroundColor: '#1abc9c', marginTop: '1rem' }}
+                            onClick={() => navigate('/employee/dashboard')}
+                        >
+                            Admin Dashboard
+                        </button>
+                    )}
+
                     <div className="profile-tabs">
                         <button
                             className={activeTab === 'settings' ? 'active' : ''}
@@ -56,9 +63,14 @@ const ProfilePage: React.FC = () => {
                             <div className="settings-section">
                                 <h3>Account Settings</h3>
                                 <p>Stuff</p>
-                                <button className="logout-button" onClick={handleLogout}>
-                                    Logout
-                                </button>
+                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                                    <button className="logout-button" onClick={handleLogout}>
+                                        Logout
+                                    </button>
+                                    <button className="logout-button" onClick={() => navigate('/order')}>
+                                        View Orders
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>

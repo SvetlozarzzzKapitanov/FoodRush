@@ -8,30 +8,39 @@ export interface Product {
     restaurantId: number
 }
 
+export interface OrderProductInfo {
+    productName: string;
+    pricePerUnit: number;
+    quantity: number;
+    totalProductPrice: number;
+}
+
 export interface Order {
-    id: number
-    userId: number
-    products: Product[]
-    total: number
-    status: 'pending' | 'preparing' | 'delivered' | 'cancelled'
-    createdAt: string
-    updatedAt: string
+    products: OrderProductInfo[];
+    totalPrice: number;
+    orderStatus: string; // previously `orderStatus`
+    createdDate: string;
+    id: number;
 }
 
 export interface User {
-    id: number
-    name: string
-    email: string
-    address?: string
-    role: 'customer' | 'admin'
+    email: string;
+    [key: string]: any;
 }
 export type Restaurant = {
     id: number;
     name: string;
-    description: string;
-    location: string;
-    imageUrl?: string;
+    address: string;
+    phoneNumber: string;
+    products?: any[]; // if needed
 };
+
+export interface TrackOrder {
+    id: number;
+    status: string;
+    totalPrice: number;
+    createdDate: string;
+}
 
 export interface RegisterCredentials {
     email: string;

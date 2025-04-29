@@ -1,0 +1,110 @@
+.product-management {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.product-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.product-row input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.product-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.product-actions button {
+    border: none;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.product-actions .edit {
+    background-color: #3498db;
+}
+.add-product-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 1rem;
+    background: #eafaf1; /* light green hint to make it pop */
+    border: 2px solid #2ecc71;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.add-product-form input {
+    padding: 0.5rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.add-product-form button.save {
+    background-color: #27ae60;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.add-product-form button.save:hover {
+    background-color: #219150;
+}
+
+.product-actions .delete {
+    background-color: #e74c3c;
+}
+
+.product-actions .save {
+    background-color: #2ecc71;
+}
+.success-message {
+    background-color: #e0f8e9;
+    color: #2ecc71;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #2ecc71;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-5px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-5px); }
+}

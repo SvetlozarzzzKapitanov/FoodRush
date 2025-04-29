@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { loginUser } from '../api/authApi';
 import MHeader from '../components/ui/Headers/MHeader';
 import './Login.css';
+import {parseJwt} from "../assets/parseJwt.ts";
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -25,9 +26,17 @@ const Login: React.FC = () => {
 
             if (res.token) {
                 localStorage.setItem('token', res.token);
-            } else {
-                console.error('Login response missing token!');
+
+                const decoded = parseJwt(res.token);
+                if (decoded) {
+                    const user = {
+                        email: decoded.sub || decoded.email,
+                        role: decoded.role || decoded.roles || decoded.authority,
+                    };
+                    localStorage.setItem('user', JSON.stringify(user));
+                }
             }
+
 
             navigate('/menu');
         } catch (err: unknown) {
