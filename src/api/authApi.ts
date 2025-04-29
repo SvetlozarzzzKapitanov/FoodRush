@@ -1,11 +1,9 @@
 // src/api/authApi.ts
-import API from './api'
-import { User } from '../types'
-import { RegisterCredentials } from '../types'
+import API from './api';
 
-export interface LoginRequest {
-    user: User;
-    token: string;
+export interface RegisterPayload {
+    email: string;
+    password: string;
 }
 
 export interface LoginCredentials {
@@ -13,13 +11,15 @@ export interface LoginCredentials {
     password: string;
 }
 
+// LOGIN
 export const loginUser = async (
     credentials: LoginCredentials
 ): Promise<{ token: string }> => {
     const response = await API.post<{ token: string }>('/auth/login', credentials);
-    const token = response.data.token;
 
+    const token = response.data.token;
     localStorage.setItem('token', token);
+
     if (!token) {
         throw new Error('Login response missing token.');
     }
@@ -28,16 +28,30 @@ export const loginUser = async (
     return { token };
 };
 
-
-
-export const registerCustomer = async (data: RegisterCredentials): Promise<void> => {
-    await API.post('/auth/register/customer', data);
+// REGISTER
+export const registerCustomer = async (
+    data: RegisterPayload
+): Promise<void> => {
+    await API.post('/auth/register/customer', {
+        email: data.email,
+        password: data.password
+    });
 };
 
-export const registerEmployee = async (data: RegisterCredentials): Promise<void> => {
-    await API.post('/auth/register/employee', data);
-}
+export const registerEmployee = async (
+    data: RegisterPayload
+): Promise<void> => {
+    await API.post('/auth/register/employee', {
+        email: data.email,
+        password: data.password
+    });
+};
 
-export const registerDelivery = async (data: RegisterCredentials): Promise<void> => {
-    await API.post('/auth/register/delivery', data);
-}
+export const registerDelivery = async (
+    data: RegisterPayload
+): Promise<void> => {
+    await API.post('/auth/register/delivery', {
+        email: data.email,
+        password: data.password
+    });
+};

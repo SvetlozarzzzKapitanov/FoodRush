@@ -27,11 +27,29 @@ const Register: React.FC = () => {
 
             await registerFunction({ email, password });
             navigate('/login', { state: { registered: true } });
-        } catch (err: any) {
-            console.error('Registration error:', err);
-            const backendMessage = err.response?.data?.message;
-            setError(backendMessage || 'Registration failed. Please try again.');
-        } finally {
+        } catch (err: unknown) {
+            console.error('Error:', err);
+
+            let backendMessage = 'Something went wrong. Please try again.';
+            if (
+                typeof err === 'object' &&
+                err !== null &&
+                'response' in err &&
+                typeof (err as any).response?.data === 'string'
+            ) {
+                backendMessage = (err as any).response.data;
+            } else if (
+                typeof err === 'object' &&
+                err !== null &&
+                'response' in err &&
+                typeof (err as any).response?.data?.message === 'string'
+            ) {
+                backendMessage = (err as any).response.data.message;
+            }
+
+            setError(backendMessage);
+        }
+        finally {
             setLoading(false);
         }
     };

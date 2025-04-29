@@ -30,11 +30,29 @@ const Login: React.FC = () => {
             }
 
             navigate('/menu');
-        } catch (err: any) {
-            console.error('Login error:', err);
-            const backendMessage = err.response?.data?.message;
-            setError(backendMessage || 'Login failed. Please check your credentials.');
-        } finally {
+        } catch (err: unknown) {
+            console.error('Error:', err);
+
+            let backendMessage = 'Something went wrong. Please try again.';
+            if (
+                typeof err === 'object' &&
+                err !== null &&
+                'response' in err &&
+                typeof (err as any).response?.data === 'string'
+            ) {
+                backendMessage = (err as any).response.data;
+            } else if (
+                typeof err === 'object' &&
+                err !== null &&
+                'response' in err &&
+                typeof (err as any).response?.data?.message === 'string'
+            ) {
+                backendMessage = (err as any).response.data.message;
+            }
+
+            setError(backendMessage);
+        }
+        finally {
             setLoading(false);
         }
     };
