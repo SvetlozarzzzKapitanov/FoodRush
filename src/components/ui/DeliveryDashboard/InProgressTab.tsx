@@ -1,45 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { parseJwt} from "../../../assets/parseJwt.ts";
-import '../styles/DeliveryTab.css';
-
-interface OrderItem {
-    name: string;
-    quantity: number;
-}
-
-interface Order {
-    id: number;
-    customerName: string;
-    items: OrderItem[];
-    totalPrice: number;
-    status: string;
-}
+import { parseJwt } from "../../../assets/parseJwt.ts";
+import { Product, Delivery, DeliveryOrder } from '../../../types';
 
 const InProgressTab: React.FC = () => {
-    const [orders, setOrders] = useState<Order[]>([]);
+    const [orders, setOrders] = useState<DeliveryOrder[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
+                console.log('🧪 InProgressTab mounted');
+
                 setLoading(true);
                 const token = localStorage.getItem('token');
+                console.log('🔑 Raw token:', token);
                 const decoded = parseJwt(token);
+                console.log('🧾 Decoded token:', decoded);
+
                 const deliveryId = decoded?.user_id;
+                console.log('🚚 Delivery ID:', deliveryId);
 
+
+                // TEMP: Use fallback to /customer/{id}
                 const res = await axios.get(`/api/orders/customer/${deliveryId}`);
-                const allOrders: Order[] = res.data || [];
+                console.log('📦 All fetched orders (as customer):', res.data);
 
-                const inProgress = allOrders.filter(o =>
-                    ['Accepted', 'Out for Delivery', 'Preparing'].includes(o.status)
-                );
+                const acceptedOrders = res.data.filter((o: DeliveryOrder) => {
+                    console.log('🔍 Checking order:', {
+                        id: o.id,
+                        status: o.status,
+                        delivery: o.delivery,
+                    });
+                    return (
+                        o.status === 'ACCEPTED' &&
+                        o.delivery?.id === deliveryId
+                    );
+                });
 
-                setOrders(inProgress);
+                console.log('✅ Filtered accepted orders:', acceptedOrders);
+                setOrders(acceptedOrders);
             } catch (err) {
-                console.error(err);
-                setError('Failed to fetch orders.');
+                console.error('❌ Failed to fetch in-progress orders:', err);
+                setError('Failed to fetch in-progress orders.');
             } finally {
                 setLoading(false);
             }
@@ -58,8 +62,16 @@ const InProgressTab: React.FC = () => {
             setOrders(prev => prev.filter(o => o.id !== orderId));
         } catch (err) {
             console.error(err);
-            alert('Failed to mark as delivered.');
+            alert('Failed to mark order as delivered.');
         }
+    };
+
+    const groupProducts = (products: Product[]) => {
+        const grouped: Record<string, number> = {};
+        for (const p of products) {
+            grouped[p.name] = (grouped[p.name] || 0) + 1;
+        }
+        return grouped;
     };
 
     return (
@@ -71,26 +83,31 @@ const InProgressTab: React.FC = () => {
             ) : error ? (
                 <p style={{ color: 'red' }}>{error}</p>
             ) : orders.length === 0 ? (
-                <p>You currently have no in-progress deliveries.</p>
+                <p>No accepted orders assigned to you.</p>
             ) : (
-                orders.map(order => (
-                    <div key={order.id} className="product-row">
-                        <div>
-                            <strong>{order.customerName}</strong><br />
-                            <small>Order #{order.id}</small>
+                orders.map(order => {
+                    const grouped = groupProducts(order.products);
+                    return (
+                        <div key={order.id} className="product-row">
+                            <div>
+                                <strong>{order.customerName}</strong><br />
+                                <small>Order #{order.id}</small>
+                            </div>
+                            <div>
+                                {Object.entries(grouped).map(([name, qty]) => (
+                                    <div key={name}>{name} × {qty}</div>
+                                ))}
+                            </div>
+                            <div>${order.totalPrice.toFixed(2)}</div>
+                            <div>Status: {order.status}</div>
+                            <div className="product-actions">
+                                <button className="save" onClick={() => markDelivered(order.id)}>
+                                    Mark Delivered
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            {order.items.map((item, idx) => (
-                                <div key={idx}>{item.name} × {item.quantity}</div>
-                            ))}
-                        </div>
-                        <div>${order.totalPrice.toFixed(2)}</div>
-                        <div>Status: {order.status}</div>
-                        <div className="product-actions">
-                            <button className="save" onClick={() => markDelivered(order.id)}>Mark Delivered</button>
-                        </div>
-                    </div>
-                ))
+                    );
+                })
             )}
         </section>
     );

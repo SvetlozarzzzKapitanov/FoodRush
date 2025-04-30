@@ -47,3 +47,22 @@ export interface Order {
 export interface Props {
     restaurantId: number;
 }
+export interface Delivery {
+    id: number;
+}
+export interface DeliveryOrder extends Order {
+    products: Product[];
+    delivery?: Delivery;
+}
+export interface OrderProductInfoDTO {
+    productName: string;
+    pricePerUnit: number;
+    quantity: number;
+    totalPrice: number;
+}
+
+export interface OrderSummaryDTO {
+    products: OrderProductInfoDTO[];
+    totalPrice: number;
+    orderStatus: string;
+}

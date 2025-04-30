@@ -15,20 +15,14 @@ export interface CreateOrderRequest {
  * Create a new order for a customer
  * POST /api/orders/create?customerId={customerId}
  */
-export const createOrder = async (
-    customerId: number,
-    productIds: number[]
-): Promise<Order> => {
-    const res = await API.post<Order>(
-        `/orders/create?customerId=${customerId}`,
-        JSON.stringify(productIds),
-        {
-            headers: { 'Content-Type': 'application/json' }
-        }
-    );
-    return res.data;
+export const createOrder = async (customerId: number, productIds: number[]) => {
+    const token = localStorage.getItem('token');
+    return axios.post(`/api/orders/create?customerId=${customerId}`, productIds, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
 };
-
 /**
  * Get full order with status and products for tracking view
  * GET /api/orders/track/{orderId}

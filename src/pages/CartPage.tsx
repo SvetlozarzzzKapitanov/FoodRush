@@ -39,7 +39,11 @@ const CartPage: React.FC = () => {
             }
 
             const productIds = cart.map((p: Product) => p.id)
-
+            console.log('🛒 Placing order with:', productIds);
+            if (productIds.length === 0) {
+                alert("No valid products in cart.");
+                return;
+            }
             await createOrder(customerId, productIds)
 
             clearCart()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { parseJwt } from '../assets/parseJwt';
-import '../styles/DeliveryTab.css';
+import { parseJwt} from "../../../assets/parseJwt.ts";
+
 
 const EarningsTab: React.FC = () => {
     const [startDate, setStartDate] = useState('');

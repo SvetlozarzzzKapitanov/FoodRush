@@ -69,9 +69,9 @@ const AvailableOrdersTab: React.FC = () => {
                             <small>Order #{order.id}</small>
                         </div>
                         <div>
-                            {order.items.map((item, idx) => (
+                            {order.products?.map((product, idx) => (
                                 <div key={idx}>
-                                    {item.name} × {item.quantity}
+                                    {product.name}
                                 </div>
                             ))}
                         </div>
