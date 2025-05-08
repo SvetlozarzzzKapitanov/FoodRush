@@ -36,7 +36,18 @@ const RestaurantsPage: React.FC = () => {
     return (
         <div className="menu-page">
             <MHeader />
-            <PageWrapper loading={loading}>
+            <PageWrapper
+                loading={loading}
+                fallbackType={
+                    !loading
+                        ? restaurants === null
+                            ? 'restaurant-error'
+                            : restaurants.length === 0
+                                ? 'restaurant-empty'
+                                : null
+                        : null
+                }
+            >
                 {query && (
                     <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
                         <p>Showing results for "{query}"</p>
@@ -55,12 +66,9 @@ const RestaurantsPage: React.FC = () => {
                         </button>
                     </div>
                 )}
-                {restaurants && restaurants.length > 0 ? (
+
+                {restaurants && restaurants.length > 0 && (
                     <RestaurantSection items={restaurants} />
-                ) : (
-                    <div className="empty-fallback">
-                        <p>No restaurants available or failed to load.</p>
-                    </div>
                 )}
             </PageWrapper>
         </div>

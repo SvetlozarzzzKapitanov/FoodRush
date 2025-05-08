@@ -6,3 +6,14 @@
     width: 100%;
     box-sizing: border-box;
 }
+.restaurant-fallback-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px dashed #147d5f;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 10rem auto;
+    max-width: 600px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #147d5f;
+}
