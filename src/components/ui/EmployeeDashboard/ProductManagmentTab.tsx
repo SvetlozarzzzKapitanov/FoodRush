@@ -52,7 +52,7 @@ const ProductManagementTab: React.FC<Props> = ({ restaurantId }) => {
             const updated = await updateProduct(p.id, {
                 ...p,
                 category: p.category.toUpperCase(),
-                restaurant: { id: restaurantId }
+                restaurantId
             });
             setProducts(prev =>
                 prev.map(prod => (prod.id === p.id ? updated : prod))

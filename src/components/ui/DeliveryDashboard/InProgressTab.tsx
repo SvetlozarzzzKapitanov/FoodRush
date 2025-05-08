@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { parseJwt } from "../../../assets/parseJwt.ts";
-import { Product, Delivery, DeliveryOrder } from '../../../types';
+import { Product, DeliveryOrder } from '../../../types';
 
 const InProgressTab: React.FC = () => {
     const [orders, setOrders] = useState<DeliveryOrder[]>([]);
@@ -14,20 +14,13 @@ const InProgressTab: React.FC = () => {
                 console.log('🧪 InProgressTab mounted');
 
                 setLoading(true);
-                const token = localStorage.getItem('token');
-                console.log('🔑 Raw token:', token);
-                const decoded = parseJwt(token);
-                console.log('🧾 Decoded token:', decoded);
-
+                const token = localStorage.getItem("token");
+                const decoded = token ? parseJwt(token) : null;
                 const deliveryId = decoded?.user_id;
-                console.log('🚚 Delivery ID:', deliveryId);
-
-
-                // TEMP: Use fallback to /customer/{id}
                 const res = await axios.get(`/api/orders/customer/${deliveryId}`);
-                console.log('📦 All fetched orders (as customer):', res.data);
+                const data = res.data as DeliveryOrder[];
 
-                const acceptedOrders = res.data.filter((o: DeliveryOrder) => {
+                const acceptedOrders = data.filter((o: DeliveryOrder) => {
                     console.log('🔍 Checking order:', {
                         id: o.id,
                         status: o.status,
@@ -54,8 +47,8 @@ const InProgressTab: React.FC = () => {
 
     const markDelivered = async (orderId: number) => {
         try {
-            const token = localStorage.getItem('token');
-            const decoded = parseJwt(token);
+            const token = localStorage.getItem("token");
+            const decoded = token ? parseJwt(token) : null;
             const deliveryId = decoded?.user_id;
 
             await axios.put(`/api/orders/delivered/${orderId}?deliveryId=${deliveryId}`);

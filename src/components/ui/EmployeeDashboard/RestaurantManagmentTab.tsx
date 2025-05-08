@@ -24,7 +24,7 @@ const RestaurantManagementTab: React.FC = () => {
         const fetch = async () => {
             try {
                 const res = await axios.get('/api/restaurants');
-                setRestaurants(res.data);
+                setRestaurants(res.data as Restaurant[]);
             } catch (err) {
                 console.error('Failed to fetch restaurants:', err);
             } finally {
@@ -37,7 +37,8 @@ const RestaurantManagementTab: React.FC = () => {
     const handleAddRestaurant = async () => {
         try {
             const res = await axios.post('/api/restaurants', newRestaurant);
-            setRestaurants(prev => [...prev, res.data]);
+            const newRestaurants = res.data as Restaurant[];
+            setRestaurants(prev => [...prev, ...newRestaurants]);
             setNewRestaurant({ name: '', address: '', phoneNumber: '' });
         } catch (err) {
             console.error('Failed to create restaurant:', err);
@@ -49,7 +50,7 @@ const RestaurantManagementTab: React.FC = () => {
         try {
             const res = await axios.put(`/api/restaurants/${restaurant.id}`, restaurant);
             setRestaurants(prev =>
-                prev.map(r => (r.id === restaurant.id ? res.data : r))
+                prev.map(r => (r.id === restaurant.id ? res.data as Restaurant : r))
             );
             setEditId(null);
         } catch (err) {

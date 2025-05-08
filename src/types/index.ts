@@ -32,8 +32,10 @@ export interface RegisterCredentials {
     password: string;
 }
 export interface OrderItem {
-    name: string;
+    id: number;
+    productName: string;
     quantity: number;
+    price: number;
 }
 
 export interface Order {

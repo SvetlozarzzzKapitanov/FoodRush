@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AvailableOrdersTab from "../components/ui/DeliveryDashboard/AvailableOrdersTab.tsx";
-import InProgressTab from "../components/ui/DeliveryDashboard/InProgressTab.tsx";
+// import AvailableOrdersTab from "../components/ui/DeliveryDashboard/AvailableOrdersTab.tsx";
+// import InProgressTab from "../components/ui/DeliveryDashboard/InProgressTab.tsx";
 import EarningsTab from "../components/ui/DeliveryDashboard/EarningsTab.tsx";
 import DeliveryOrdersTab from "../components/ui/DeliveryDashboard/DeliveryOrdersTab.tsx";
 

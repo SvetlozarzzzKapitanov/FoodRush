@@ -88,7 +88,9 @@ const EmployeeDashboard: React.FC = () => {
                             restaurantId ? <PendingOrdersTab restaurantId={restaurantId} /> : <p>Select a restaurant to view orders.</p>
                         )}
                         {activeTab === 'Restaurant' && <RestaurantManagementTab />}
-                        {activeTab === 'Revenue' && <RevenueTab restaurantId={restaurantId} />}
+                        {restaurantId !== null && (
+                            <RevenueTab restaurantId={restaurantId} />
+                        )}
                     </div>
                 </div>
             </PageWrapper>

@@ -22,14 +22,16 @@ const OrderPage: React.FC = () => {
                 if (!customerId) return;
 
                 const res = await axios.get(`/api/orders/customer/${customerId}`);
-                setOrders(res.data);
+                setOrders(res.data as Order[]);
 
             } catch (err) {
-                if (axios.isAxiosError(err)) {
-                    console.error('API error:', err.response?.data || err.message);
+                if (typeof err === 'object' && err !== null && 'response' in err) {
+                    const axiosError = err as { response?: { data?: any }, message?: string };
+                    console.error('API error:', axiosError.response?.data || axiosError.message);
                 } else {
-                    console.error('Unexpected error:', err);
+                    console.error('Unknown error:', err);
                 }
+
             }
         };
 

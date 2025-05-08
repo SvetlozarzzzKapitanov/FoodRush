@@ -1,19 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { parseJwt} from "../../../assets/parseJwt.ts";
-
-interface OrderItem {
-    name: string;
-    quantity: number;
-}
-
-interface Order {
-    id: number;
-    customerName: string;
-    items: OrderItem[];
-    totalPrice: number;
-    status: string;
-}
+import { Order, OrderItem } from '../../../types';
 
 const AvailableOrdersTab: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -25,7 +13,7 @@ const AvailableOrdersTab: React.FC = () => {
             try {
                 setLoading(true);
                 const res = await axios.get('/api/orders/pending');
-                setOrders(res.data || []);
+                setOrders(res.data as Order[]);
             } catch (err) {
                 console.error(err);
                 setError('Failed to fetch available orders.');
@@ -39,8 +27,8 @@ const AvailableOrdersTab: React.FC = () => {
 
     const handleAccept = async (orderId: number) => {
         try {
-            const token = localStorage.getItem('token');
-            const decoded = parseJwt(token);
+            const token = localStorage.getItem("token");
+            const decoded = token ? parseJwt(token) : null;
             const deliveryId = decoded?.user_id;
 
             await axios.post(`/api/orders/accept/${orderId}?deliveryId=${deliveryId}`);
@@ -69,11 +57,13 @@ const AvailableOrdersTab: React.FC = () => {
                             <small>Order #{order.id}</small>
                         </div>
                         <div>
-                            {order.products?.map((product, idx) => (
+                            {order.items?.map((item: OrderItem, idx: number) => (
                                 <div key={idx}>
-                                    {product.name}
+                                    <p>{item.productName} x {item.quantity}</p>
+                                    <p>Price: ${item.price}</p>
                                 </div>
                             ))}
+
                         </div>
                         <div>${order.totalPrice.toFixed(2)}</div>
                         <div>Status: {order.status}</div>

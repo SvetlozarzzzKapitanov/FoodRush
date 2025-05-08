@@ -31,7 +31,7 @@ const RevenueTab: React.FC<Props> = ({ restaurantId }) => {
                     endDate: new Date(endDate).toISOString(),
                 }
             });
-            setRevenue(res.data);
+            setRevenue(res.data as number);
         } catch (err) {
             console.error(err);
             setError('Failed to fetch revenue.');

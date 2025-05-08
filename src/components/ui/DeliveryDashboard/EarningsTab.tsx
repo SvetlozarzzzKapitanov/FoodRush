@@ -19,8 +19,8 @@ const EarningsTab: React.FC = () => {
         try {
             setLoading(true);
             setError('');
-            const token = localStorage.getItem('token');
-            const decoded = parseJwt(token);
+            const token = localStorage.getItem("token");
+            const decoded = token ? parseJwt(token) : null;
             const deliveryId = decoded?.user_id;
 
             const res = await axios.get(`/api/orders/earnings/${deliveryId}`, {
@@ -30,7 +30,7 @@ const EarningsTab: React.FC = () => {
                 }
             });
 
-            setEarnings(res.data);
+            setEarnings(res.data as number)
         } catch (err) {
             console.error(err);
             setError('Failed to fetch earnings.');

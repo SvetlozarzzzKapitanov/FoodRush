@@ -30,7 +30,7 @@ const TrackOrderPage: React.FC = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const token = localStorage.getItem('token');
+                const token = localStorage.getItem("token") ?? "";
                 const decoded = parseJwt(token);
                 const customerId = decoded?.user_id;
 
@@ -40,7 +40,7 @@ const TrackOrderPage: React.FC = () => {
                     }
                 });
 
-                setOrder(res.data);
+                setOrder(res.data as OrderSummaryDTO)
             } catch (err) {
                 console.error('Failed to fetch order:', err);
                 alert('Unable to load order details.');

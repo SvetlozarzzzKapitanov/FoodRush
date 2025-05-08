@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { parseJwt} from "../../../assets/parseJwt.ts";
 import { Order} from "../../../types";
 
 const DeliveryOrdersTab: React.FC = () => {
-    const navigate = useNavigate();
     const [currentTab, setCurrentTab] = useState<'current' | 'delivered'>('current');
     const [orders, setOrders] = useState<Order[]>([]);
 
@@ -19,7 +17,7 @@ const DeliveryOrdersTab: React.FC = () => {
                 if (!deliveryId) return;
 
                 const res = await axios.get(`/api/orders/customer/${deliveryId}`);
-                setOrders(res.data);
+                setOrders(res.data as Order[]);
             } catch (err) {
                 console.error('Failed to fetch delivery orders:', err);
             }
